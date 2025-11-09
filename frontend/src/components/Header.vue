@@ -1,14 +1,19 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
-import { watchEffect, ref } from 'vue'
-import { isAuthenticated } from '../auth.js'
+import { ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { isAuthenticated } from '../auth.js';
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
-const usuarioLogado = ref({
-    nome: localStorage.getItem('usuario')
-});
+const usuarioLogado = ref({ nome: localStorage.getItem('usuario') || '' });
+
+watch(
+    () => route.fullPath,
+    () => {
+        usuarioLogado.value.nome = localStorage.getItem('usuario') || '';
+    }
+);
 
 const logout = async () => {
     try {
@@ -16,16 +21,12 @@ const logout = async () => {
         console.warn('Erro ao fazer logout:', err);
     } finally {
         localStorage.removeItem('token');
-        localStorage.removeItem('userName');
+        localStorage.removeItem('usuario');
         isAuthenticated.value = false;
+        usuarioLogado.value.nome = '';
         router.push('/');
     }
-}
-
-watchEffect(() => {
-    isAuthenticated.value = !!localStorage.getItem('token')
-})
-
+};
 </script>
 
 <template>
@@ -33,8 +34,8 @@ watchEffect(() => {
         <div class="header-content">
             <div class="header-left">
                 <router-link to="/" custom v-slot="{ navigate }">
-                    <svg @click="navigate" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
-                        stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <svg @click="navigate" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                        fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-building2 lucide-building-2 w-10 h-10" aria-hidden="true">
                         <path d="M10 12h4"></path>
                         <path d="M10 8h4"></path>
