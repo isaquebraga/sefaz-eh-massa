@@ -10,7 +10,6 @@ COPY . .
 
 EXPOSE 5173
 
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint-frontend.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-
 ENTRYPOINT ["/entrypoint.sh"]
