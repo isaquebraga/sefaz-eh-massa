@@ -1,38 +1,18 @@
-version: "3.9"
-
 services:
   backend:
     build:
       context: ./backend
-    container_name: backend
-    volumes:
-      - ./backend:/var/www/html
-    working_dir: /var/www/html
     ports:
       - "8000:8000"
-    command: >
-      sh -c "
-        composer install &&
-        cp .env.example .env &&
-        php artisan key:generate &&
-        touch database/database.sqlite &&
-        php artisan migrate --seed &&
-        php artisan serve --host=127.0.0.1 --port=8000
-      "
+    volumes:
+      - ./backend:/var/www/html"
 
   frontend:
     build:
       context: ./frontend
-    container_name: frontend
-    volumes:
-      - ./frontend:/app
-    working_dir: /app
     ports:
       - "5173:5173"
+    volumes:
+      - ./frontend:/app
     depends_on:
       - backend
-    command: >
-      sh -c "
-        npm install &&
-        npm run dev
-      "
