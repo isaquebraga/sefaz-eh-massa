@@ -115,7 +115,9 @@ Antes de iniciar, você precisa ter instalado em sua máquina:
 4. **Acesse o sistema:**
 - http://127.0.0.1:5173
 
-> ⚙️ O backend usa banco SQLite, criado automaticamente dentro do container.
+> ⚙️ O backend usa banco SQLite, criado automaticamente dentro do container.7
+
+---
 
 ## 💡 Estrutura do Projeto
     sefaz-eh-massa/
@@ -130,6 +132,8 @@ Antes de iniciar, você precisa ter instalado em sua máquina:
     │   └── Dockerfile
     ├── docker-compose.yml  # Orquestração dos containers
     └── README.md           # Documentação do projeto
+
+---
 
 ## 🤝 Contribuindo
 
@@ -154,11 +158,15 @@ Sinta-se à vontade para abrir issues, enviar PRs ou sugerir melhorias criativas
     git push origin feature/minha-feature
     ```
 
+---
+
 ## 📝 Licença
 
 Este projeto está sob a Licença MIT.
 
 Consulte o arquivo [LICENSE](https://github.com/isaquebraga/sefaz-eh-massa/blob/main/LICENSE) para mais detalhes.
+
+---
 
 ## ✨ Agradecimentos
 
