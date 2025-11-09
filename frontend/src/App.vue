@@ -2,31 +2,13 @@
 import { RouterView } from 'vue-router'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
-import ToastWrapper from './views/ToastWrapper.vue'
+import ToastWrapper from './components/ToastWrapper.vue'
 import { useRoute, useRouter } from 'vue-router'
-import axios from 'axios'
 import { isAuthenticated } from './auth.js'
 import { watchEffect, computed } from 'vue'
+import BackToTop from './components/BackToTop.vue'
 
 const route = useRoute()
-const router = useRouter()
-
-const logout = async () => {
-  try {
-    await axios.post('http://127.0.0.1:8000/api/logout', {}, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-  } catch (err) {
-    console.warn('Erro ao fazer logout (token pode estar expirado):', err)
-  } finally {
-    localStorage.removeItem('token')
-    delete axios.defaults.headers.common['Authorization']
-    isAuthenticated.value = false
-    router.push('/')
-  }
-}
 
 watchEffect(() => {
   isAuthenticated.value = !!localStorage.getItem('token')
@@ -68,6 +50,7 @@ const mainStyle = computed(() => {
     <Footer></Footer>
 
     <ToastWrapper></ToastWrapper>
+    <BackToTop></BackToTop>
   </div>
 </template>
 
