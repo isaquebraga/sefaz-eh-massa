@@ -37,7 +37,7 @@ O sistema possui **três níveis de usuário**, cada um com permissões específ
 > Usuário: admin
 > Senha: admin123
 > ```
-> (Essas credenciais foram incluídas apenas para **fins de avaliação e correção** do projeto — em um ambiente real, jamais seriam expostas.)
+> (Essas credenciais foram incluídas apenas para **fins de avaliação e correção** do projeto - em um ambiente real, jamais seriam expostas.)
 
 ---
 
@@ -49,8 +49,7 @@ O projeto foi desenvolvido conforme os requisitos definidos pela SEFAZ:
 - **Backend:** Laravel (PHP)  
 - **Banco de Dados:** SQLite  
 - **Deve conter CRUD** completo  
-- **Camada de Login** protegendo o CRUD  
-- **Containerização via Docker**  
+- Extra: **Camada de Login** protegendo o CRUD e **Containerização via Docker**  
 - E o principal: **abusar da criatividade!** ✨  
 
 ---
@@ -70,8 +69,6 @@ O projeto foi desenvolvido conforme os requisitos definidos pela SEFAZ:
 
 ### 🐳 Containerização
 - **Docker & Docker Compose**  
-  - Facilita a execução do projeto em qualquer ambiente.  
-  - Frontend e backend são executados em containers separados e interligados.
 
 ---
 
