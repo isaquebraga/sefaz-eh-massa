@@ -1,18 +1,22 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { watchEffect } from 'vue'
+import { watchEffect, ref } from 'vue'
 import { isAuthenticated } from '../auth.js'
 
 const route = useRoute()
 const router = useRouter()
 
+const usuarioLogado = ref({
+    nome: localStorage.getItem('usuario')
+});
+
 const logout = async () => {
     try {
-
     } catch (err) {
         console.warn('Erro ao fazer logout:', err);
     } finally {
         localStorage.removeItem('token');
+        localStorage.removeItem('userName');
         isAuthenticated.value = false;
         router.push('/');
     }
@@ -28,15 +32,17 @@ watchEffect(() => {
     <header>
         <div class="header-content">
             <div class="header-left">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
-                    stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide lucide-building2 lucide-building-2 w-10 h-10" aria-hidden="true">
-                    <path d="M10 12h4"></path>
-                    <path d="M10 8h4"></path>
-                    <path d="M14 21v-3a2 2 0 0 0-4 0v3"></path>
-                    <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path>
-                    <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path>
-                </svg>
+                <router-link to="/" custom v-slot="{ navigate }">
+                    <svg @click="navigate" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-building2 lucide-building-2 w-10 h-10" aria-hidden="true">
+                        <path d="M10 12h4"></path>
+                        <path d="M10 8h4"></path>
+                        <path d="M14 21v-3a2 2 0 0 0-4 0v3"></path>
+                        <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path>
+                        <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path>
+                    </svg>
+                </router-link>
 
                 <div class="header-text">
                     <span class="text-head">Secretaria Municipal de Fazenda</span>
@@ -45,38 +51,44 @@ watchEffect(() => {
             </div>
 
             <nav>
-                <router-link to="/" custom v-slot="{ navigate }">
-                    <button v-if="route.path !== '/'" @click="navigate" data-slot="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-house w-4 h-4 mr-2" aria-hidden="true">
-                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                            <path
-                                d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
-                            </path>
-                        </svg>
-                        Início
+                <div>
+                    <router-link to="/" custom v-slot="{ navigate }">
+                        <button v-if="route.path !== '/'" @click="navigate" data-slot="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-house w-4 h-4 mr-2" aria-hidden="true">
+                                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                                <path
+                                    d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
+                                </path>
+                            </svg>
+                            Início
+                        </button>
+                    </router-link>
+                    <router-link v-if="route.path !== '/admin' && route.path !== '/erro-admin'" to="/admin" custom
+                        v-slot="{ navigate }">
+                        <button v-if="route.path !== '/admin'" @click="navigate" data-slot="button">
+                            Painel Admin
+                        </button>
+                    </router-link>
+                    <router-link v-if="route.path !== '/impostos'" to="/impostos" custom v-slot="{ navigate }">
+                        <button v-if="route.path !== '/impostos'" @click="navigate" data-slot="button">
+                            Impostos
+                        </button>
+                    </router-link>
+                    <router-link v-if="!isAuthenticated" to="/login" custom v-slot="{ navigate }">
+                        <button v-if="route.path !== '/login'" @click="navigate" data-slot="button">
+                            Login
+                        </button>
+                    </router-link>
+                    <button v-else @click="logout" data-slot="button">
+                        Sair
                     </button>
-                </router-link>
-                <router-link v-if="route.path !== '/admin' && route.path !== '/erro-admin'" to="/admin" custom
-                    v-slot="{ navigate }">
-                    <button v-if="route.path !== '/admin'" @click="navigate" data-slot="button">
-                        Painel Admin
-                    </button>
-                </router-link>
-                <router-link v-if="route.path !== '/impostos'" to="/impostos" custom v-slot="{ navigate }">
-                    <button v-if="route.path !== '/impostos'" @click="navigate" data-slot="button">
-                        Impostos
-                    </button>
-                </router-link>
-                <router-link v-if="!isAuthenticated" to="/login" custom v-slot="{ navigate }">
-                    <button v-if="route.path !== '/login'" @click="navigate" data-slot="button">
-                        Login
-                    </button>
-                </router-link>
-                <button v-else @click="logout" data-slot="button">
-                    Sair
-                </button>
+                </div>
+
+                <div class="nav-user">
+                    <span v-if="isAuthenticated">Usuário atual: <b>{{ usuarioLogado.nome }}</b>.</span>
+                </div>
             </nav>
         </div>
     </header>
@@ -104,6 +116,10 @@ header {
     align-items: center;
 }
 
+.header-left svg {
+    cursor: pointer;
+}
+
 .header-text {
     display: flex;
     flex-direction: column;
@@ -121,8 +137,22 @@ header .text-body {
 }
 
 nav {
+    position: relative;
+}
+
+nav div {
     display: flex;
+    justify-content: center;
     gap: 15px;
+}
+
+.nav-user {
+    color: #FFF;
+    font-size: 10px;
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 nav button {
@@ -186,7 +216,7 @@ nav button:hover {
 
 @media (max-width: 480px) {
     header {
-        padding: 15px 0;
+        padding: 15px 0 30px 0;
     }
 
     .header-left {
