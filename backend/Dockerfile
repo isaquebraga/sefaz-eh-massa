@@ -1,7 +1,8 @@
-FROM php:8.2
+FROM php:8.2-cli
 
 RUN apt-get update && apt-get install -y \
-    zip unzip sqlite3 libsqlite3-dev git curl
+    git unzip libzip-dev zip sqlite3 libsqlite3-dev && \
+    docker-php-ext-install pdo pdo_sqlite zip
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -9,14 +10,6 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN composer install
-
-RUN cp .env.example .env && php artisan key:generate
-
-RUN mkdir -p database && touch database/database.sqlite
-
-RUN php artisan migrate --seed
-
-EXPOSE 8000
-
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+RUN mkdir -p /var/www/html/database && \
+    touch /var/www/html/database/database.sqlite && \
+    chown -R www-data:www-data /var/www/html
