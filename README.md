@@ -1,112 +1,165 @@
-# SEFAZ é Massa! 🚀
+# 💰 Sefaz é Massa!
 
-Sistema de gerenciamento e consulta de impostos desenvolvido com Laravel e Vue.js. Interface moderna e responsiva para visualização e administração de dados fiscais.
+> Projeto desenvolvido como parte do processo seletivo da **Secretaria Municipal de Fazenda de Maceió (SEFAZ)**.  
+
+> O objetivo é apresentar um **guia explicativo dos impostos** voltado aos cidadãos maceioenses, com uma **interface moderna, responsiva e interativa** para visualização e administração de dados fiscais.
+
+---
+
+## 🧠 Sobre o Projeto
+
+O **Sefaz é Massa!** foi criado para facilitar o acesso à informação sobre os impostos municipais, explicando sua **importância, finalidade e descrição** de forma simples e acessível.
+
+Além disso, o sistema possui uma **camada administrativa** voltada à gestão dos dados fiscais, com diferentes níveis de acesso, garantindo segurança e organização.
+
+---
+
+## 🔐 Níveis de Acesso
+
+O sistema possui **três níveis de usuário**, cada um com permissões específicas:
+
+### 👤 Usuário Externo
+- Acessa o site público.
+- Pode visualizar informações sobre os impostos (sigla, descrição, finalidade, etc).
+- Não tem acesso à área administrativa.
+
+### 🧑‍💼 Usuário Interno
+- Possui acesso ao **painel administrativo**.
+- Pode **criar, editar e excluir impostos**.
+
+### 👑 Usuário Administrador
+- Tem todas as permissões do usuário interno.
+- Além disso, pode **criar, editar e excluir usuários internos**.
+- O usuário **admin** não pode ser excluído.
+
+> 💡 Para testar o acesso administrativo, utilize as credenciais pré-configuradas:
+> ```
+> Usuário: admin
+> Senha: admin123
+> ```
+> (Essas credenciais foram incluídas apenas para **fins de avaliação e correção** do projeto — em um ambiente real, jamais seriam expostas.)
+
+---
+
+## 🧩 Requisitos do Desafio
+
+O projeto foi desenvolvido conforme os requisitos definidos pela SEFAZ:
+
+- **Frontend:** Vue.js  
+- **Backend:** Laravel (PHP)  
+- **Banco de Dados:** SQLite  
+- **Deve conter CRUD** completo  
+- **Camada de Login** protegendo o CRUD  
+- **Containerização via Docker**  
+- E o principal: **abusar da criatividade!** ✨  
+
+---
 
 ## 💻 Tecnologias
 
-### Backend
-- PHP 8.2
-- Laravel 10
-- Laravel Sanctum (Autenticação)
-- SQLite (Banco de dados)
+### 🧠 Backend
+- **PHP 8.2**
+- **Laravel 12**
+- **SQLite** 
+- **Composer** 
 
-### Frontend
-- Vue.js 3
-- Vite
-- Axios
-- Vue Router
-- CSS Puro (Sem frameworks)
+### 🎨 Frontend
+- **Vue.js 3**
+- **Vite** 
+- **CSS Puro** 
+
+### 🐳 Containerização
+- **Docker & Docker Compose**  
+  - Facilita a execução do projeto em qualquer ambiente.  
+  - Frontend e backend são executados em containers separados e interligados.
+
+---
 
 ## 🚀 Funcionalidades
 
-- ✅ Autenticação segura com Laravel Sanctum
-- 📊 Painel administrativo
-- 💰 Consulta de impostos
-- 👥 Gerenciamento de usuários
-- 🎨 Interface moderna e responsiva
-- 🔒 Proteção CSRF e validação de tokens
+✅ Visualização pública de impostos (usuário externo)  
+✅ CRUD completo de impostos (usuário interno)  
+✅ Gerenciamento de usuários internos (usuário administrador)  
+✅ Sistema de autenticação e controle de acesso  
+✅ Interface simples, moderna e responsiva  
+✅ Deploy automatizado com Docker  
+
+---
 
 ## 📦 Instalação
 
-### Requisitos
-- PHP >= 8.2
-- Composer
-- Node.js >= 16
-- Git
+### 🔧 Requisitos
 
-### Backend (Laravel)
+Antes de iniciar, você precisa ter instalado em sua máquina:
 
-```bash
-# Clone o repositório
-git clone https://github.com/seu-usuario/sefaz-eh-massa.git
-cd sefaz-eh-massa/backend
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
-# Instale as dependências
-composer install
+---
 
-# Configure o ambiente
-cp .env.example .env
-php artisan key:generate
+### ▶️ Executando o Projeto com Docker
 
-# Crie e popule o banco
-php artisan migrate --seed
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/isaquebraga/sefaz-eh-massa.git
+   cd sefaz-eh-massa
+   ```
 
-# Inicie o servidor
-php artisan serve
-```
+2. **Construa e inicie os containers:**
+   ```bash
+   docker compose up --build
+   ```
 
-### Frontend (Vue.js)
+3. **Aguarde a inicialização completa dos serviços.**
 
-```bash
-# Na pasta frontend
-cd ../frontend
+4. **Acesse o sistema:**
+- http://127.0.0.1:5173
 
-# Instale as dependências
-npm install
+> ⚙️ O backend usa banco SQLite, criado automaticamente dentro do container.
 
-# Inicie o servidor de desenvolvimento
-npm run dev
-```
-
-## ⚙️ Configuração
-
-### Backend (.env)
-```env
-APP_URL=http://127.0.0.1:8000
-FRONTEND_URL=http://localhost:5173
-
-SESSION_DRIVER=file
-SESSION_DOMAIN=localhost
-SANCTUM_STATEFUL_DOMAINS=127.0.0.1:5173,localhost:5173
-
-DB_CONNECTION=sqlite
-DB_DATABASE=database/database.sqlite
-
-FRONTEND_SECRET=vue-access-123
-```
-
-### Frontend
-O frontend já está configurado para acessar a API em `http://127.0.0.1:8000`. Se precisar alterar, ajuste no arquivo de ambiente do frontend.
-
-## 👤 Credenciais de Teste
-
-```
-Usuário: admin
-Senha: admin123
-```
+## 💡 Estrutura do Projeto
+    sefaz-eh-massa/
+    ├── backend/            # Aplicação Laravel (API e lógica de negócios)
+    │   ├── app/
+    │   ├── database/
+    │   ├── routes/
+    │   └── Dockerfile
+    ├── frontend/           # Aplicação Vue.js (interface do usuário)
+    │   ├── src/
+    │   ├── public/
+    │   └── Dockerfile
+    ├── docker-compose.yml  # Orquestração dos containers
+    └── README.md           # Documentação do projeto
 
 ## 🤝 Contribuindo
 
-1. Faça o fork do projeto
-2. Crie sua feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+Contribuições são sempre bem-vindas!
+
+Sinta-se à vontade para abrir issues, enviar PRs ou sugerir melhorias criativas.
+
+1. Faça um fork do projeto
+
+2. Crie uma branch para sua feature:
+    ```bash
+    git checkout -b feature/minha-feature
+    ```
+
+3. Faça o commit:
+    ```bash
+    git commit -m "feat: adiciona nova funcionalidade"
+    ```
+
+4. Envie para o repositório remoto:
+    ```bash
+    git push origin feature/minha-feature
+    ```
 
 ## 📝 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto está sob a Licença MIT.
+
+Consulte o arquivo [LICENSE](https://github.com/isaquebraga/sefaz-eh-massa/blob/main/LICENSE) para mais detalhes.
 
 ## ✨ Agradecimentos
 
-Desenvolvido com 💙 para a SEFAZ.
+Desenvolvido com 💙 e criatividade para a Secretaria Municipal de Fazenda de Maceió ([SEFAZ](https://maceio.al.gov.br/secretarias-e-orgaos/sefaz)).
