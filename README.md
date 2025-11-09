@@ -111,7 +111,7 @@ Antes de iniciar, você precisa ter instalado em sua máquina:
 
 4. **Acesse o sistema:**
 
-Acesse o [Link](http://127.0.0.1:5173).
+Através do [Link](http://127.0.0.1:5173).
 
 > ⚙️ O backend usa banco SQLite, criado automaticamente dentro do container.
 
