@@ -17,7 +17,7 @@ services:
         php artisan key:generate &&
         touch database/database.sqlite &&
         php artisan migrate --seed &&
-        php artisan serve
+        php artisan serve --host=127.0.0.1 --port=8000
       "
 
   frontend:
