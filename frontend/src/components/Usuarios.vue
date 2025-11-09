@@ -99,6 +99,11 @@ const fecharModal = () => {
 
 const salvarUsuario = async () => {
     try {
+        if (form.usuario.includes(" ")) {
+            addToast("O usuário não pode conter espaços.", "error");
+            return;
+        }
+
         const payload = {
             usuario: form.usuario,
         };
