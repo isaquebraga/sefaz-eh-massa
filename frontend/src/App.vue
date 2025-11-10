@@ -5,13 +5,36 @@ import Footer from './components/Footer.vue'
 import ToastWrapper from './components/ToastWrapper.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { isAuthenticated } from './auth.js'
-import { watchEffect, computed } from 'vue'
+import { watchEffect, computed, onMounted, onUnmounted } from 'vue'
 import BackToTop from './components/BackToTop.vue'
 
 const route = useRoute()
 
 watchEffect(() => {
   isAuthenticated.value = !!localStorage.getItem('token')
+})
+
+onMounted(() => {
+  const handleBeforeUnload = () => {
+    const token = localStorage.getItem('token')
+
+    if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+      return
+    }
+
+    if (token) {
+      navigator.sendBeacon('/api/logout', JSON.stringify({}))
+    }
+
+    localStorage.removeItem('token')
+    localStorage.removeItem('usuario')
+  }
+
+  window.addEventListener('beforeunload', handleBeforeUnload)
+
+  onUnmounted(() => {
+    window.removeEventListener('beforeunload', handleBeforeUnload)
+  })
 })
 
 const mainStyle = computed(() => {
