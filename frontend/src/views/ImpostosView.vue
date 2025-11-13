@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import axiosInstance from "../../services/http.js";
 
 const impostos = ref([])
 
@@ -11,7 +12,7 @@ const openGlobal = ref(null)
 
 const fetchImpostos = async () => {
     try {
-        const response = await axios.get('http://127.0.0.1:8000/api/impostos', {
+        const response = await axiosInstance.get("impostos", {
             headers: {
                 'X-Frontend-Token': 'vue-access-123'
             }
