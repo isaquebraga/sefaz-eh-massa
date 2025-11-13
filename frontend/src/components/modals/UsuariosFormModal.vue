@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, computed, ref } from 'vue';
+import { defineProps, defineEmits, ref } from 'vue';
 
 defineProps({
     modelValue: { type: Boolean, required: true },

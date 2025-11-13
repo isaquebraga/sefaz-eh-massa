@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
 import axiosInstance from "../../services/http.js";
 
 const impostos = ref([])
