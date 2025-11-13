@@ -39,7 +39,7 @@ O sistema possui **três níveis de usuário**, cada um com permissões específ
 > ```
 > (Essas credenciais foram incluídas apenas para **fins de avaliação e correção** do projeto - em um ambiente real, jamais seriam expostas.) 
 
-> **Observação:** após a aprovação do projeto 🥳, as credenciais administrativas foram alteradas para o ambiente de deploy e não estão mais presentes neste repositório.
+> **Observação:** após a aprovação, as credenciais administrativas foram atualizadas para o ambiente de deploy e **não correspondem mais às listadas acima**.
 
 ---
 
