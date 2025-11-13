@@ -101,11 +101,13 @@ export default {
                 </div>
             </div>
 
-            <div class="bottom-form">
+            <!-- comen -->
+
+            <!-- <div class="bottom-form">
                 <span class="title">Credenciais de teste:</span>
                 <span class="body">Usuário: admin</span>
                 <span class="body">Senha: admin123</span>
-            </div>
+            </div> -->
 
             <div class="buttons">
                 <button type="submit" class="first-button">Entrar</button>

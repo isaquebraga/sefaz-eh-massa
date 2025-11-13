@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
         DB::table("usuarios")->insert([
             [
                 "usuario" => "admin",
-                "senha" => Hash::make("admin123"),
+                "senha" => Hash::make("Isaque2004@"),
                 "created_at" => now(),
                 "updated_at" => now(),
             ],
