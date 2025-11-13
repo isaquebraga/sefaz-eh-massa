@@ -38,6 +38,7 @@ O sistema possui **três níveis de usuário**, cada um com permissões específ
 > Senha: admin123
 > ```
 > (Essas credenciais foram incluídas apenas para **fins de avaliação e correção** do projeto - em um ambiente real, jamais seriam expostas.)
+> **Observação:** após a aprovação do projeto 🥳, as credenciais administrativas foram alteradas para o ambiente de deploy e não estão mais presentes neste repositório.
 
 ---
 
