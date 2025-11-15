@@ -120,11 +120,12 @@ Antes de iniciar, você precisa ter instalado em sua máquina:
 ## 🌐 Deploy Online
 
 🔗 Back: https://sefaz-eh-massa.onrender.com
+
 🔗 Front: https://sefaz-eh-massa.vercel.app/
 
 >💡 Importante: por ser um deploy gratuito no Render, o servidor “dorme” após um tempo sem uso.
 
-> Antes de abrir o front, acesse o link do back e aguarde ele iniciar (vai aparecer algo como "error": "Acesso não autorizado." — é normal, já que o acesso está restrito ao front).
+> Antes de abrir o front, acesse o link do back e aguarde ele iniciar (vai aparecer algo como "error": "Acesso não autorizado." - é normal, já que o acesso está restrito ao front).
 
 ---
 
